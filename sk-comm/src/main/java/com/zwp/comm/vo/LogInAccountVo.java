@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.io.Serializable;
+
 /**
  * @program: seckiller
  * @description: 保存用户登录信息的对象
@@ -16,7 +18,9 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class LogInAccountVo {
+public class LogInAccountVo implements Serializable {
+
+    private static final long serialVersionUID = -8071355785654822432L;
     private Long userId;//用户id
     private String username;
     private String password;

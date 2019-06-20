@@ -1,4 +1,4 @@
-package security;
+package com.zwp.web.security;
 
 import com.zwp.comm.vo.LogInAccountVo;
 import com.zwp.service.LogInService.LogInCacheService;
@@ -29,7 +29,16 @@ public class UserAccountProvider implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
 //        throw new UsernameNotFoundException("username:"+username+" is not exit");
-        LogInAccountVo vo = lds.getUserAccountByUsername(username);
+        LogInAccountVo vo =
+                lcs.getUserAccountByUsername(username);// 缓存获取登录账号
+        if(vo==null){
+            vo = lds.getUserAccountByUsername(username);
+            if(vo!=null)
+                lcs.setUserAccountCache(vo);
+        }
+        if(vo==null)
+            throw new UsernameNotFoundException("username:"+username+" is not exits!");
+
         return UserAccount.from(vo);
     }
 }

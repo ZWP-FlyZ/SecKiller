@@ -18,4 +18,8 @@ public class LogInCacheService {
         return null;
     }
 
+    public void setUserAccountCache(LogInAccountVo user){
+
+    }
+
 }

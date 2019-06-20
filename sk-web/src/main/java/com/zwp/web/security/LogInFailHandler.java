@@ -1,4 +1,4 @@
-package security;
+package com.zwp.web.security;
 
 import com.zwp.comm.resulttype.ResponseResult;
 import com.zwp.comm.resulttype.ResultStatus;

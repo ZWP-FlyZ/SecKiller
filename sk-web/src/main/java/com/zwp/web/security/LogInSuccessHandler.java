@@ -1,4 +1,4 @@
-package security;
+package com.zwp.web.security;
 
 import com.google.gson.Gson;
 import com.zwp.comm.resulttype.ResponseResult;
@@ -8,7 +8,6 @@ import com.zwp.web.vo.UserAccount;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 import javax.servlet.ServletException;
