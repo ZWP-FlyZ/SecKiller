@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.zwp</groupId>
+		<artifactId>seckiller</artifactId>
+		<version>0.0.1</version>
+
+	</parent>
+
+	<packaging>jar</packaging>
+	<groupId>com.zwp</groupId>
+	<artifactId>sk-service</artifactId>
+	<version>0.0.1</version>
+	<name>sk-service</name>
+	<description>服务和业务逻辑层</description>
+
+	<properties>
+		<java.version>1.8</java.version>
+	</properties>
+
+	<dependencies>
+
+
+		<dependency>
+			<groupId>com.zwp</groupId>
+			<artifactId>sk-comm</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-amqp</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		
+	</dependencies>
+
+
+</project>
