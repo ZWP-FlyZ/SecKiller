@@ -31,6 +31,8 @@ public class HelloLoginController {
     @GetMapping("/hello")
     @ResponseBody
     public String say(HttpServletRequest request){
+        HttpSession sess = request.getSession();
+        logger.info(sess.getId()+","+sess.getMaxInactiveInterval());
         return "hello";
     }
 
