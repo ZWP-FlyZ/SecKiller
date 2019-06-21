@@ -1,4 +1,4 @@
-package com.zwp.web.account;
+package com.zwp.web.controller;
 
 import com.zwp.comm.enums.Roles;
 import com.zwp.comm.resulttype.ResponseResult;
@@ -12,18 +12,23 @@ import com.zwp.web.vo.LogonVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.session.SessionRegistry;
+import org.springframework.util.StreamUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.imageio.ImageIO;
+import javax.imageio.stream.ImageOutputStream;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.nio.file.Files;
 import java.time.Instant;
 
 /**
@@ -58,15 +63,15 @@ public class LogonController {
         sess.setAttribute(VERIFY_CODE_KEY,vc);//将验证码保存在session中
         BufferedImage img = los.getVerifyImage(vc);
 
-//        try {
-//            OutputStream os = response.getOutputStream();
+        try(InputStream is = los.getVerifyImage();
+            OutputStream os = response.getOutputStream();) {
 //            ImageIO.write(img,"JPEG",os);//注意这里根据实际需求更改
-//            os.flush();
-//        } catch(Exception e){
-//            logger.error("Exception at transport img",e);
-//            sess.removeAttribute(VERIFY_CODE_KEY);
-//            res = ResponseResult.build(ResultStatus.EXCEPTION);
-//        }
+            StreamUtils.copy(is,os);
+        } catch(Exception e){
+            logger.error("Exception at transport img",e);
+            sess.removeAttribute(VERIFY_CODE_KEY);
+            res = ResponseResult.build(ResultStatus.EXCEPTION);
+        }
         return res;
     }
 

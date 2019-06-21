@@ -2,9 +2,15 @@ package com.zwp.service.register;
 
 import com.zwp.comm.resulttype.ResultStatus;
 import com.zwp.comm.vo.UserAccountVo;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
 
+import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.io.InputStream;
 
 /**
  * @program: seckiller
@@ -16,14 +22,23 @@ import java.awt.image.BufferedImage;
 @Service
 public class LogOnService {
 
+    @Autowired
+    ApplicationContext ctx;
+
     /**
      * 通过verifyCode生成一个验证图片
      * @param verifyCode
      * @param verifyCode
      * @return
      */
-    public BufferedImage getVerifyImage(String verifyCode){
-            return null;
+    public BufferedImage getVerifyImage(String verifyCode) throws IOException {
+        Resource res =ctx.getResource("classpath:static/background.jpg");
+        return ImageIO.read(res.getInputStream());
+    }
+
+    public InputStream getVerifyImage() throws IOException {
+        Resource res =ctx.getResource("classpath:static/background.jpg");
+        return res.getInputStream();
     }
 
     /**

@@ -1,4 +1,4 @@
-package com.zwp.web.account;
+package com.zwp.web.controller;
 
 import com.zwp.comm.resulttype.ResponseResult;
 import com.zwp.comm.resulttype.ResultStatus;
@@ -9,14 +9,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.List;
 
 /**
  * @program: seckiller
