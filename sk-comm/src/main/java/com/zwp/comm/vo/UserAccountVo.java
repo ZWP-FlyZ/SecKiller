@@ -18,7 +18,7 @@ import java.io.Serializable;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class LogInAccountVo implements Serializable {
+public class UserAccountVo implements Serializable {
 
     private static final long serialVersionUID = -8071355785654822432L;
     private Long userId;//用户id

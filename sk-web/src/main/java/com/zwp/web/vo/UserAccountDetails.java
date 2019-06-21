@@ -1,6 +1,7 @@
 package com.zwp.web.vo;
 
-import com.zwp.comm.vo.LogInAccountVo;
+import com.zwp.comm.utils.UserIdUtils;
+import com.zwp.comm.vo.UserAccountVo;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -20,7 +21,7 @@ import java.util.function.Function;
  * @create: 2019-06-20 17:55
  * @version: v1.0
  **/
-public class UserAccount implements Serializable, UserDetails {
+public class UserAccountDetails implements Serializable, UserDetails {
 
 
     private static final long serialVersionUID = -6666197406654734596L;
@@ -31,7 +32,7 @@ public class UserAccount implements Serializable, UserDetails {
     private final static Function<String,String> cxg = f->"{noop}"+f;
 
 
-    public UserAccount(String username,String password,String... roles){
+    public UserAccountDetails(String username, String password, String... roles){
         Assert.notNull(username,"the username is null");
         Assert.notNull(password,"the password is null");
         Assert.notNull(roles,"the roles is null");
@@ -50,8 +51,8 @@ public class UserAccount implements Serializable, UserDetails {
      * @return 转换后的UserAccount
      *
      */
-    public static UserAccount from(LogInAccountVo user){
-        UserAccount ua = new UserAccount(user.getUsername(),
+    public static UserAccountDetails from(UserAccountVo user){
+        UserAccountDetails ua = new UserAccountDetails(user.getUsername(),
                                         user.getPassword(),
                                         user.getRole().split(","));
         ua.status = user.getStatus();

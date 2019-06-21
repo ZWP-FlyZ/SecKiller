@@ -21,9 +21,9 @@ public class HelloLoginController {
     @ResponseBody
     public String login(HttpServletRequest request,String username,String password){
         HttpSession sess = request.getSession();
-        logger.info("username:{},password:{} login",username,password);
+        logger.info("username:{},password:{} account",username,password);
         logger.info(sess.getId()+","+sess.getMaxInactiveInterval());
-        String ret = String.format("username:%s time:%s login",username, Instant.now());
+        String ret = String.format("username:%s time:%s account",username, Instant.now());
         ret += " "+sess.getCreationTime();
         return ret;
     }

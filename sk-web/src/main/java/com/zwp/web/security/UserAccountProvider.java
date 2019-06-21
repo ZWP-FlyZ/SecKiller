@@ -1,9 +1,9 @@
 package com.zwp.web.security;
 
-import com.zwp.comm.vo.LogInAccountVo;
-import com.zwp.service.LogInService.LogInCacheService;
-import com.zwp.service.LogInService.LogInDbService;
-import com.zwp.web.vo.UserAccount;
+import com.zwp.comm.vo.UserAccountVo;
+import com.zwp.service.login.LogInCacheService;
+import com.zwp.service.login.LogInDbService;
+import com.zwp.web.vo.UserAccountDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -29,16 +29,13 @@ public class UserAccountProvider implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
 //        throw new UsernameNotFoundException("username:"+username+" is not exit");
-        LogInAccountVo vo =
-                lcs.getUserAccountByUsername(username);// 缓存获取登录账号
-        if(vo==null){
-            vo = lds.getUserAccountByUsername(username);
-            if(vo!=null)
-                lcs.setUserAccountCache(vo);
-        }
+
+        // 在高并发登录情况下，该处需要访问数据库
+        // 可能出现问题，因此可以限流保护系统
+        UserAccountVo vo = lds.getUserAccountByUsername(username);
         if(vo==null)
             throw new UsernameNotFoundException("username:"+username+" is not exits!");
 
-        return UserAccount.from(vo);
+        return UserAccountDetails.from(vo);
     }
 }

@@ -4,7 +4,7 @@ import com.google.gson.Gson;
 import com.zwp.comm.resulttype.ResponseResult;
 import com.zwp.comm.resulttype.ResultStatus;
 import com.zwp.comm.utils.JsonUtils;
-import com.zwp.web.vo.UserAccount;
+import com.zwp.web.vo.UserAccountDetails;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;
@@ -33,11 +33,13 @@ public class LogInSuccessHandler implements AuthenticationSuccessHandler {
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
                                         Authentication authentication)
             throws IOException, ServletException {
-        UserAccount user = (UserAccount)authentication.getPrincipal();
+        UserAccountDetails user = (UserAccountDetails)authentication.getPrincipal();
 
-        logger.info("login -> user:{}",user.getUsername());
-        ResponseResult<String> res = ResponseResult.build(ResultStatus.SUCCESS);
+        logger.info("account -> user:{}",user.getUsername());
+        ResponseResult<String> res =
+                ResponseResult.build(ResultStatus.SUCCESS);
         out(response,res);// 回报登录成功信息
+//        throw  new IllegalArgumentException("test");
     }
 
     private void out(HttpServletResponse response,Object body) throws IOException{
