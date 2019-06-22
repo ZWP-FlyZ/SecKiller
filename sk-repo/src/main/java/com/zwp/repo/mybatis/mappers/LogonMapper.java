@@ -1,4 +1,4 @@
-package com.zwp.repo.mapper;
+package com.zwp.repo.mybatis.mappers;
 
 /**
  * @program: seckiller

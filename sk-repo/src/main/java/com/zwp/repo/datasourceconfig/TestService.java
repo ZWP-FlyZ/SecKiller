@@ -1,5 +1,7 @@
 package com.zwp.repo.datasourceconfig;
 
+import com.zwp.comm.vo.UserAccountVo;
+import com.zwp.repo.mybatis.mappers.LoginMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,30 +19,22 @@ import java.sql.SQLException;
 @Service
 public class TestService {
 
-
     @Autowired
-    DataSource datasource;
+    LoginMapper mapper;
 
     @UseDatasource(DataSourceType.READ_DATASOURCE)
     public void doService(){
         System.err.println("do service read");
-        try {
-            Connection c = datasource.getConnection();
-            c.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        UserAccountVo vo = mapper.getUserAccountVoByUserId((long)1234);
+        System.err.println(vo);
+
     }
 
     @UseDatasource(DataSourceType.WRITE_DATASOURCE)
     public void doService2(){
         System.err.println("do service write");
-        try {
-            Connection c = datasource.getConnection();
-            c.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        UserAccountVo vo =mapper.getUserAccountVoByUserId((long)1234);
+        System.err.println(vo);
     }
 
 }

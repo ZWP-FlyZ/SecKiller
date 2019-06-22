@@ -4,6 +4,7 @@ import com.zwp.repo.datasourceconfig.DataSourceType;
 import com.zwp.repo.datasourceconfig.DynamicDatasourceAspect;
 import com.zwp.repo.datasourceconfig.TestService;
 import com.zwp.repo.datasourceconfig.UseDatasource;
+import org.apache.ibatis.mapping.ResultMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;

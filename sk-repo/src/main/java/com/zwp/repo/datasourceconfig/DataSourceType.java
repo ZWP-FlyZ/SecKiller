@@ -8,8 +8,10 @@ package com.zwp.repo.datasourceconfig;
  * @version: v1.0
  **/
 public enum DataSourceType {
-    READ_DATASOURCE(0,"读-数据源"),
-    WRITE_DATASOURCE(1,"写-数据源");
+
+    DEFAULT_DATASOURCE(0,"默认-数据源"),
+    READ_DATASOURCE(1,"读-数据源"),
+    WRITE_DATASOURCE(2,"写-数据源");
 
     private int code;
     private String message;

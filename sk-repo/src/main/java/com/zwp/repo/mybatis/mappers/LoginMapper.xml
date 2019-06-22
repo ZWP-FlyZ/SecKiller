@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zwp.repo.mybatis.mappers.LoginMapper">
+
+    <resultMap id="userAccountMap" type="com.zwp.comm.vo.UserAccountVo">
+        <result column="user_id" property="userId"/>
+        <result column="user_name" property="username"/>
+        <result column="user_password" property="password"/>
+        <result column="user_pass_salt" property="salt"/>
+        <result column="user_role" property="role"/>
+        <result column="user_status" property="status"/>
+        <result column="user_reg_time" property="regTime"/>
+        <result column="user_last_login_time" property="lastLogTime"/>
+        <result column="user_login_cot" property="logCot"/>
+    </resultMap>
+
+    <sql id="TABLE_NAME">user_account</sql>
+
+    <select id="getUserAccountVoByUserId" resultMap="userAccountMap">
+        SELECT * FROM
+        <include refid="TABLE_NAME"/>
+        WHERE user_id = #{userId}
+        LIMIT 1
+    </select>
+
+    <update id="updateLogInStatus" parameterType="com.zwp.comm.vo.UserAccountVo">
+        UPDATE
+        <include refid="TABLE_NAME"/>
+        SET
+        user_reg_time = #{lastLogTime} ,
+        user_login_cot = user_login_cot+1
+    </update>
+
+
+</mapper>
