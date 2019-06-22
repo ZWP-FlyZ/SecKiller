@@ -63,10 +63,9 @@ public class LogonController {
         sess.setAttribute(VERIFY_CODE_KEY,vc);//将验证码保存在session中
         BufferedImage img = los.getVerifyImage(vc);
 
-        try(InputStream is = los.getVerifyImage();
-            OutputStream os = response.getOutputStream();) {
-//            ImageIO.write(img,"JPEG",os);//注意这里根据实际需求更改
-            StreamUtils.copy(is,os);
+        try(OutputStream os = response.getOutputStream();) {
+            ImageIO.write(img,"JPEG",os);//注意这里根据实际需求更改
+//            StreamUtils.copy(is,os);
         } catch(Exception e){
             logger.error("Exception at transport img",e);
             sess.removeAttribute(VERIFY_CODE_KEY);

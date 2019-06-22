@@ -54,7 +54,8 @@ public class LogInController {
         }catch (Exception e){
             logger.error("unknown error -> username:{} ",user.getUsername());
             logger.error("update login status error. ",e);
-            //清除本次登录信息
+            //清除本次登录信息，
+            // 注意通过这种方式清除可能会有问题
             SecurityContextHolder.getContext().setAuthentication(null);
             res = ResponseResult.build(ResultStatus.EXCEPTION);
         }

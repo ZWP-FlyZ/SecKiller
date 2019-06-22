@@ -18,8 +18,8 @@ public class LogInDbService {
 
     /**
      * 登录从数据库中获取数据，若获取用户
-     * @param username
-     * @return
+     * @param username 用户名
+     * @return UserAccountVo 当用户不存在时返回null
      */
 
     public UserAccountVo getUserAccountByUsername(String username){

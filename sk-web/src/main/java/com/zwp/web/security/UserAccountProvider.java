@@ -21,9 +21,6 @@ public class UserAccountProvider implements UserDetailsService {
     @Autowired
     private LogInDbService lds;
 
-    @Autowired
-    private LogInCacheService lcs;
-
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
