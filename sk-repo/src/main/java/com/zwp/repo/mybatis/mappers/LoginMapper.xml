@@ -32,6 +32,7 @@
         SET
         user_last_login_time = #{lastLogTime} ,
         user_login_cot = user_login_cot+1
+        WHERE user_id = #{userId}
     </update>
 
 

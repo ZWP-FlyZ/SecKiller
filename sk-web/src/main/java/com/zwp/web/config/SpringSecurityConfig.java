@@ -1,9 +1,6 @@
 package com.zwp.web.config;
 
-import com.zwp.web.security.LogInFailHandler;
-import com.zwp.web.security.RequestAccessDeniedHandler;
-import com.zwp.web.security.UnAuthorizedHandler;
-import com.zwp.web.security.UserAccountProvider;
+import com.zwp.web.security.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -28,20 +25,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 //@EnableWebSecurity
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
-//    @Override
-//    protected UserDetailsService userDetailsService() {
-//        InMemoryUserDetailsManager mag = new InMemoryUserDetailsManager();
-//        mag.createUser(User.withDefaultPasswordEncoder().username("user").password("password").roles("USER").build());
-//        return mag;
-//    }
 
-
-
-
-//    @Bean
-//    public SessionRegistry sessionRegistry() {
-//        return new SessionRegistryImpl();
-//    }
 
     @Bean
     public UserDetailsService accountProvider(){
@@ -51,7 +35,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     public PasswordEncoder passwordEncoder() {
-        return PasswordEncoderFactories.createDelegatingPasswordEncoder();
+        return new MyPasswordEncoder();
     }
 
     /**

@@ -25,7 +25,7 @@ import java.lang.reflect.Method;
 public class DynamicDatasourceAspect {
     private final static Logger LOGGER  = LoggerFactory.getLogger(DynamicDatasourceAspect.class);
 
-    @Pointcut("@annotation(com.zwp.repo.datasourceconfig.UseDatasource)")
+    @Pointcut("@annotation(com.zwp.repo.datasourceconfig.UseDatasource) ")
     public void cutpoint(){}
 
     @Before("cutpoint()")
@@ -49,7 +49,7 @@ public class DynamicDatasourceAspect {
         } catch (Exception e) {
             LOGGER.error("Error at change datasource ",e);
         }
-        LOGGER.info("datasource:{} selected ",type);
+        LOGGER.debug("datasource:{} selected ",type);
         DataSourceContextHolder.setDataSource(type);
     }
 

@@ -8,6 +8,7 @@ import com.zwp.comm.utils.PassEncUtils;
 import com.zwp.comm.utils.UserIdUtils;
 import com.zwp.comm.vo.UserAccountVo;
 import com.zwp.service.register.LogOnService;
+import com.zwp.web.security.MyPasswordEncoder;
 import com.zwp.web.vo.LogonVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,6 +31,8 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.nio.file.Files;
 import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 /**
  * @program: seckiller
@@ -44,10 +47,12 @@ public class LogonController {
 
     private final static String VERIFY_CODE_KEY = "verifyCode";
     private final static Logger logger = LoggerFactory.getLogger(LogonController.class);
+    // 时间格式化器，线程安全
+    private final static DateTimeFormatter fmt = DateTimeFormatter.
+                                            ofPattern("yyyy/MM/dd HH:mm:ss");
 
     @Autowired
     LogOnService los;
-
 
 
     /**
@@ -81,6 +86,7 @@ public class LogonController {
                                         BindingResult result){
         String verifyCode = (String)sess.getAttribute(VERIFY_CODE_KEY);
         ResponseResult<String> res=null; ResultStatus status = null;
+        logger.debug(verifyCode);
         if(verifyCode==null)
             res = ResponseResult.build(ResultStatus.UNVERIFIED);
         else if(result.hasErrors()){
@@ -123,7 +129,7 @@ public class LogonController {
         //由用户名获得数字ID
         ua.setUserId(UserIdUtils.getUserId(user.getUsername()));
         ua.setLogCot(0);
-        ua.setRegTime(Instant.now().toString());
+        ua.setRegTime(fmt.format(LocalDateTime.now()));
         ua.setRole(Roles.ROLE_USER.getName());
         ua.setSalt(PassEncUtils.salt());
         ua.setPassword(PassEncUtils

@@ -2,6 +2,7 @@ package com.zwp.repo.mybatis;
 
 import com.zwp.repo.datasourceconfig.DynamicDataSource;
 import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.ibatis.transaction.managed.ManagedTransactionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.context.properties.ConfigurationProperties;

@@ -29,8 +29,7 @@ public class LogInFailHandler implements AuthenticationFailureHandler {
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response,
                                         AuthenticationException exception) throws IOException, ServletException {
         String username = request.getParameter("username");
-        logger.info("account failure -> user:{}",username);
-        exception.printStackTrace();
+        logger.info("account failure -> user:{} ex:{}",username,exception.getMessage());
         ResponseResult<String> res = ResponseResult.build(ResultStatus.PASS_ERROR);
         out(response,res);// 回报未登录信息
     }

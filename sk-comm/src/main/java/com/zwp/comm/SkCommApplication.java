@@ -15,9 +15,7 @@ public class SkCommApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		TestUtils.doTest();
 
-		System.err.println(MD5.encode("zwpasdfasdf567890asdf").substring(0,5));
 	}
 
 

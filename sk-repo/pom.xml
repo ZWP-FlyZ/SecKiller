@@ -92,7 +92,7 @@
 					<include>**/*.xml</include>
 					<include>**/*.ini</include>
 				</includes>
-				<filtering>true</filtering>
+				<filtering>false</filtering>
 			</resource>
 		</resources>
 

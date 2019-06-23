@@ -45,7 +45,7 @@ public class AccountTest {
         DataSourceContextHolder.setDataSource(DataSourceType.WRITE_DATASOURCE);
         UserAccountVo user = login.getUserAccountVoByUserId((long)1234);
         String ut = DateTimeFormatter.
-                ofPattern("yyyy:MM:dd HH:mm:ss").format(LocalDateTime.now());
+                ofPattern("yyyy/MM/dd HH:mm:ss").format(LocalDateTime.now());
         LOGGER.info(ut);
         user.setLastLogTime(ut);
         Integer res = login.updateLogInStatus(user);
@@ -63,7 +63,7 @@ public class AccountTest {
         user.setSalt(PassEncUtils.salt());
         user.setRole("ROLE_USER");
         String ut = DateTimeFormatter.
-                ofPattern("yyyy:MM:dd HH:mm:ss").format(LocalDateTime.now());
+                ofPattern("yyyy/MM/dd HH:mm:ss").format(LocalDateTime.now());
         user.setRegTime(ut);
         user.setStatus(0);
         int v =logon.saveUserAccount(user);

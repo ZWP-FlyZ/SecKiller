@@ -1,5 +1,6 @@
 package com.zwp.web.vo;
 
+import com.zwp.comm.utils.PassEncUtils;
 import com.zwp.comm.utils.UserIdUtils;
 import com.zwp.comm.vo.UserAccountVo;
 import org.springframework.security.core.GrantedAuthority;
@@ -12,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
+import java.util.function.BiFunction;
 import java.util.function.Function;
 
 /**
@@ -29,16 +31,17 @@ public class UserAccountDetails implements Serializable, UserDetails {
     private String password;
     private Integer status=0;
     private List<GrantedAuthority> roles;// 角色，以ROLE_开头
-    private final static Function<String,String> cxg = f->"{noop}"+f;
+    private final static BiFunction<String,String,String> cxg =
+                                (p,s)->p+PassEncUtils.SALT_SPILTER+s;
 
 
-    public UserAccountDetails(String username, String password, String... roles){
+    public UserAccountDetails(String username, String password,String salt, String... roles){
         Assert.notNull(username,"the username is null");
         Assert.notNull(password,"the password is null");
         Assert.notNull(roles,"the roles is null");
 
         this.username = username;
-        this.password = cxg.apply(password);
+        this.password = cxg.apply(password,salt);
         this.roles= new ArrayList<>();
 
         Arrays.stream(roles).forEach(r->
@@ -54,6 +57,7 @@ public class UserAccountDetails implements Serializable, UserDetails {
     public static UserAccountDetails from(UserAccountVo user){
         UserAccountDetails ua = new UserAccountDetails(user.getUsername(),
                                         user.getPassword(),
+                                        user.getSalt(),
                                         user.getRole().split(","));
         ua.status = user.getStatus();
         return ua;

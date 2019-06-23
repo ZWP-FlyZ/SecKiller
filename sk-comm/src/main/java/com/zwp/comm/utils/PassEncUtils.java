@@ -9,6 +9,8 @@ package com.zwp.comm.utils;
  **/
 public class PassEncUtils {
 
+    public final static String SALT_SPILTER="<-SALT->";
+
     /**
      * 返回长度不超过10的salt字符串
      * @return
