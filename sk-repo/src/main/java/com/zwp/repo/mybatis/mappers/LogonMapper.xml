@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.zwp.repo.mybatis.mappers.LoginMapper">
+<mapper namespace="com.zwp.repo.mybatis.mappers.LogonMapper">
 
     <resultMap id="userAccountMap" type="com.zwp.comm.vo.UserAccountVo">
         <result column="user_id" property="userId"/>
@@ -18,21 +18,16 @@
     </resultMap>
 
     <sql id="TABLE_NAME">user_account</sql>
+    <sql id="PARAM_LIST">user_id,user_name,user_password,user_pass_salt,
+                            user_role,user_status,user_reg_time</sql>
 
-    <select id="getUserAccountVoByUserId" resultMap="userAccountMap">
-        SELECT * FROM
-        <include refid="TABLE_NAME"/>
-        WHERE user_id = #{userId}
-        LIMIT 1
-    </select>
-
-    <update id="updateLogInStatus" parameterType="com.zwp.comm.vo.UserAccountVo">
-        UPDATE
-        <include refid="TABLE_NAME"/>
-        SET
-        user_last_login_time = #{lastLogTime} ,
-        user_login_cot = user_login_cot+1
-    </update>
+    <insert id="saveUserAccount" parameterType="com.zwp.comm.vo.UserAccountVo">
+        INSERT IGNORE INTO
+        <include refid="TABLE_NAME"/> (<include refid="PARAM_LIST"/>)
+        VALUES
+        (#{userId},#{username},#{password},
+        #{salt},#{role},#{status},#{regTime})
+    </insert>
 
 
 </mapper>

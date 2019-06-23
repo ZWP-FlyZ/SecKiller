@@ -33,8 +33,8 @@ CREATE TABLE IF NOT EXISTS `seckiller`.`user_account` (
   `user_role` VARCHAR(20) NOT NULL DEFAULT 'user' COMMENT '用户角色 user-普通用户  seller-商家  admin-管理员',
   `user_status` TINYINT(2) NOT NULL DEFAULT 0 COMMENT '用户账号状态 0-可用 其他',
   `user_reg_time` DATETIME NOT NULL COMMENT '注册时间',
-  `user_last_login_time` DATETIME NOT NULL COMMENT '最后一次登录时间',
-  `user_login_cot` INT(11) NOT NULL COMMENT '用户登录计数',
+  `user_last_login_time` DATETIME NULL COMMENT '最后一次登录时间',
+  `user_login_cot` INT(11) NULL COMMENT '用户登录计数',
   PRIMARY KEY (`user_id`),
   UNIQUE INDEX `user_id_hash_UNIQUE` (`user_id` ASC) VISIBLE)
 ENGINE = InnoDB

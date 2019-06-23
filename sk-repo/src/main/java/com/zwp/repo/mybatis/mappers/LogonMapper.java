@@ -1,5 +1,7 @@
 package com.zwp.repo.mybatis.mappers;
 
+import com.zwp.comm.vo.UserAccountVo;
+
 /**
  * @program: seckiller
  * @description: 注册时Mapper接口
@@ -8,4 +10,13 @@ package com.zwp.repo.mybatis.mappers;
  * @version: v1.0
  **/
 public interface LogonMapper {
+
+    /**
+     * 存储注册的用户信息
+     * @param user
+     * @return 若插入成功返回1，若出现重复数据返回0，
+     *          若出现其他错误则报DataAccess异常
+     */
+    Integer saveUserAccount(UserAccountVo user);
+
 }

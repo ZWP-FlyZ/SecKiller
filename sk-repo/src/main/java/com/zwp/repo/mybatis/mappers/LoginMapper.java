@@ -11,7 +11,6 @@ import org.apache.ibatis.annotations.*;
  * @version: v1.0
  **/
 
-@Mapper
 public interface LoginMapper {
 
 

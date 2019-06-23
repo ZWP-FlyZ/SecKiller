@@ -1,13 +1,11 @@
-package com.zwp.repo.datasourceconfig;
+package com.zwp.repo;
 
 import com.zwp.comm.vo.UserAccountVo;
+import com.zwp.repo.datasourceconfig.DataSourceType;
+import com.zwp.repo.datasourceconfig.UseDatasource;
 import com.zwp.repo.mybatis.mappers.LoginMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import javax.sql.DataSource;
-import java.sql.Connection;
-import java.sql.SQLException;
 
 /**
  * @program: seckiller

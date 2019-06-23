@@ -1,9 +1,6 @@
 package com.zwp.comm.vo;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.io.Serializable;
 
@@ -14,10 +11,7 @@ import java.io.Serializable;
  * @create: 2019-06-20 17:38
  * @version: v1.0
  **/
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
+@Data
 public class UserAccountVo implements Serializable {
 
     private static final long serialVersionUID = -8071355785654822432L;
