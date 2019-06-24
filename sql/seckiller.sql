@@ -47,7 +47,7 @@ DEFAULT CHARACTER SET = utf8;
 DROP TABLE IF EXISTS `seckiller`.`sk_goods` ;
 
 CREATE TABLE IF NOT EXISTS `seckiller`.`sk_goods` (
-  `goods_id` BIGINT(20) NOT NULL,
+  `goods_id` BIGINT(20) NOT NULL AUTO_INCREMENT,
   `goods_name` VARCHAR(45) NOT NULL COMMENT '商品名',
   `goods_sk_price` DECIMAL(10,2) NOT NULL DEFAULT 0.00 COMMENT '商品秒杀价格',
   `goods_sk_stock` INT(11) NOT NULL DEFAULT 0 COMMENT '秒杀总库存数',

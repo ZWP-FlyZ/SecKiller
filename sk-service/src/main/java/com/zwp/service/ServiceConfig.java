@@ -11,5 +11,6 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  * @version: v1.0
  **/
 @Configuration
+@EnableTransactionManagement
 public class ServiceConfig {
 }

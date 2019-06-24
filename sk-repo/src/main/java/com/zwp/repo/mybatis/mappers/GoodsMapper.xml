@@ -14,14 +14,40 @@
         <result column="sk_end_time" property="endTime"/>
     </resultMap>
 
-    <sql id="TABLE_NAME">sk_goods</sql>
-
-    <select id="getSkGoodsList" resultMap="skGoodsResultMap">
+    <sql id="TABLE_NAME_SK_GOODS">sk_goods</sql>
+    <sql id="TABLE_NAME_GOODS_DETAIL">goods_detail</sql>
+    <sql id="TABLE_PARAM_SK_GOODS">
+        goods_name, goods_sk_price,goods_sk_stock,goods_sk_cur_stock,
+        sk_start_time,sk_end_time
+    </sql>
+    <sql id="TABLE_PARAM_GOODS_DETAIL">
+        goods_id,goods_name, goods_detail,goods_img,goods_price,goods_stock
+    </sql>
+    <select id="selectSkGoodsList" resultMap="skGoodsResultMap">
         SELECT * FROM
-        <include refid="TABLE_NAME"/>
-
-
+        <include refid="TABLE_NAME_SK_GOODS"/>
     </select>
+
+
+    <insert id="insertSkGoods" parameterType="com.zwp.comm.vo.SkGoodsVo"
+            useGeneratedKeys="true" keyColumn="goods_id" keyProperty="goodsId" >
+        INSERT INTO <include refid="TABLE_NAME_SK_GOODS"/>
+        (<include refid="TABLE_PARAM_SK_GOODS"/>)
+        VALUES (
+            #{goodsName},#{goodsSkPrice},#{goodsSkStock},#{goodsSkCurStock},
+            #{startTime},#{endTime}
+        )
+    </insert>
+
+    <!--  注意在GoodsDetail 表中的good_id 必须与 sk_goods 中的goods_id 对应 -->
+    <insert id="insertSkGoodsDetail" parameterType="com.zwp.comm.vo.SkGoodsVo">
+        INSERT INTO <include refid="TABLE_NAME_GOODS_DETAIL"/>
+        (<include refid="TABLE_PARAM_GOODS_DETAIL"/>)
+        VALUES (
+        #{goodsId},#{goodsName},#{goodsDetail},#{goodsImgPath},#{goodsPrice},#{goodsStock}
+        )
+    </insert>
+
 
 
 </mapper>

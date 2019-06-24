@@ -17,7 +17,9 @@ public enum ResultStatus {
     UNVERIFIED(2500,"无验证码信息"),//必须先请求验证码
     ERROR_REGISTER_INFO(2501,"不合法注册信息"),
     ERROR_VERIFY_CODE(2502,"验证码错误"),
-    EXIT_USERNAME(2503,"用户名已存在");
+    EXIT_USERNAME(2503,"用户名已存在"),
+
+    INCURRENT_SKGOODS_INFO(3000,"错误货物数据");
 
 
 

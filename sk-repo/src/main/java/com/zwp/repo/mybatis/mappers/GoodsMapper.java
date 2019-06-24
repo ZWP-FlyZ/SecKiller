@@ -17,7 +17,18 @@ public interface GoodsMapper {
      * 获得所有秒杀货物列表
      * @return
      */
-     List<SkGoodsVo> getSkGoodsList();
+     List<SkGoodsVo> selectSkGoodsList();
+
+    /**
+     * 保存秒杀货物
+     * @param goods
+     * @return
+     */
+     Integer insertSkGoods(SkGoodsVo goods);
+
+
+     Integer insertSkGoodsDetail(SkGoodsVo goods);
+
 
 
 }
