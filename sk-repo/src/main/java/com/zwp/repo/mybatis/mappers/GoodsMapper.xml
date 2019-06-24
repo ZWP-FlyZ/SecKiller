@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zwp.repo.mybatis.mappers.GoodsMapper">
+
+    <resultMap id="skGoodsResultMap" type="com.zwp.comm.vo.SkGoodsVo">
+        <id column="goods_id" property="goodsId"/>
+        <result column="goods_name" property="goodsName"/>
+        <result column="goods_sk_price" property="goodsSkPrice"/>
+        <result column="goods_sk_stock" property="goodsSkStock"/>
+        <result column="goods_sk_cur_stock" property="goodsSkCurStock"/>
+        <result column="sk_start_time" property="startTime"/>
+        <result column="sk_end_time" property="endTime"/>
+    </resultMap>
+
+    <sql id="TABLE_NAME">sk_goods</sql>
+
+    <select id="getSkGoodsList" resultMap="skGoodsResultMap">
+        SELECT * FROM
+        <include refid="TABLE_NAME"/>
+
+
+    </select>
+
+
+</mapper>

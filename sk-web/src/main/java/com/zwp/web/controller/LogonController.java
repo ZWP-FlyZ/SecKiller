@@ -86,7 +86,6 @@ public class LogonController {
                                         BindingResult result){
         String verifyCode = (String)sess.getAttribute(VERIFY_CODE_KEY);
         ResponseResult<String> res=null; ResultStatus status = null;
-        logger.debug(verifyCode);
         if(verifyCode==null)
             res = ResponseResult.build(ResultStatus.UNVERIFIED);
         else if(result.hasErrors()){
@@ -132,6 +131,7 @@ public class LogonController {
         ua.setRegTime(fmt.format(LocalDateTime.now()));
         ua.setRole(Roles.ROLE_USER.getName());
         ua.setSalt(PassEncUtils.salt());
+        ua.setStatus(0);
         ua.setPassword(PassEncUtils
                 .encodePassword(user.getPassword(),ua.getSalt()));
         return ua;

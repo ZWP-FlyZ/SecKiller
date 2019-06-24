@@ -6,7 +6,7 @@
 <mapper namespace="com.zwp.repo.mybatis.mappers.LoginMapper">
 
     <resultMap id="userAccountMap" type="com.zwp.comm.vo.UserAccountVo">
-        <result column="user_id" property="userId"/>
+        <id column="user_id" property="userId"/>
         <result column="user_name" property="username"/>
         <result column="user_password" property="password"/>
         <result column="user_pass_salt" property="salt"/>

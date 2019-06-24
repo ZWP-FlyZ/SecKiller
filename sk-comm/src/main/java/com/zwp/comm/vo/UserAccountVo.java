@@ -12,6 +12,7 @@ import java.io.Serializable;
  * @version: v1.0
  **/
 @Data
+@ToString(exclude = "password")
 public class UserAccountVo implements Serializable {
 
     private static final long serialVersionUID = -8071355785654822432L;

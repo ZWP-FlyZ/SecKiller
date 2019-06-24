@@ -5,18 +5,6 @@
 
 <mapper namespace="com.zwp.repo.mybatis.mappers.LogonMapper">
 
-    <resultMap id="userAccountMap" type="com.zwp.comm.vo.UserAccountVo">
-        <result column="user_id" property="userId"/>
-        <result column="user_name" property="username"/>
-        <result column="user_password" property="password"/>
-        <result column="user_pass_salt" property="salt"/>
-        <result column="user_role" property="role"/>
-        <result column="user_status" property="status"/>
-        <result column="user_reg_time" property="regTime"/>
-        <result column="user_last_login_time" property="lastLogTime"/>
-        <result column="user_login_cot" property="logCot"/>
-    </resultMap>
-
     <sql id="TABLE_NAME">user_account</sql>
     <sql id="PARAM_LIST">user_id,user_name,user_password,user_pass_salt,
                             user_role,user_status,user_reg_time</sql>
