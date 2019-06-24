@@ -3,7 +3,6 @@ package com.zwp.service.goods;
 import com.zwp.comm.resulttype.ResultStatus;
 import com.zwp.comm.vo.SkGoodsVo;
 import com.zwp.repo.datasourceconfig.DataSourceType;
-import com.zwp.repo.datasourceconfig.TxManagers;
 import com.zwp.repo.datasourceconfig.UseDatasource;
 import com.zwp.repo.mybatis.mappers.GoodsMapper;
 import org.slf4j.Logger;
@@ -39,16 +38,14 @@ public class GoodsService {
         return goodsMapper.selectSkGoodsList();
     }
 
-
     /**
      * 注册货物
      * @param goods
      * @return
      */
-//    @UseDatasource(DataSourceType.WRITE_DATASOURCE)
-    @Transactional(TxManagers.WRITE_TX)
+    @UseDatasource(DataSourceType.WRITE_DATASOURCE)
+    @Transactional
     public ResultStatus regSkGoods(SkGoodsVo goods){
-
         int v = goodsMapper.insertSkGoods(goods);
         LOGGER.debug(goods.toString());
 //        throw new IllegalArgumentException("test");

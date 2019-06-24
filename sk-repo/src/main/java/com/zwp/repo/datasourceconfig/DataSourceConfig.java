@@ -2,12 +2,15 @@ package com.zwp.repo.datasourceconfig;
 
 import com.alibaba.druid.pool.DruidDataSource;
 import com.zwp.comm.utils.PassEncUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 
+import javax.annotation.Resource;
 import javax.sql.DataSource;
 import java.util.HashMap;
 import java.util.Map;
@@ -49,23 +52,29 @@ public class DataSourceConfig {
 
     /**
      * 事务系统
-     * @param readDatasource 读数据源事务
+     *
      * @return
      */
-    @Bean(TxManagers.READ_TX)
-    public DataSourceTransactionManager readTxManager(DruidDataSource readDatasource) {
-        return new DataSourceTransactionManager(readDatasource);
+//    @Bean(TxManagers.READ_TX)
+//    public DataSourceTransactionManager readTxManager(DruidDataSource readDatasource) {
+//        return new DataSourceTransactionManager(readDatasource);
+//    }
+//
+//    @Bean(TxManagers.WRITE_TX)
+//    public DataSourceTransactionManager writeTxManager(DruidDataSource writeDatasource) {
+//        return new DataSourceTransactionManager(writeDatasource);
+//    }
+//
+//    @Bean(TxManagers.ACCOUNT_TX)
+//    public DataSourceTransactionManager accountTxManager(DruidDataSource accountDatasource) {
+//        return new DataSourceTransactionManager(accountDatasource);
+//    }
+
+    @Bean
+    public DataSourceTransactionManager transactionManager(@Qualifier("datasource") DataSource dataSource){
+        return new DataSourceTransactionManager(dataSource);
     }
 
-    @Bean(TxManagers.WRITE_TX)
-    public DataSourceTransactionManager writeTxManager(DruidDataSource writeDatasource) {
-        return new DataSourceTransactionManager(writeDatasource);
-    }
-
-    @Bean(TxManagers.ACCOUNT_TX)
-    public DataSourceTransactionManager accountTxManager(DruidDataSource accountDatasource) {
-        return new DataSourceTransactionManager(accountDatasource);
-    }
 
     /**
      * 读数据源

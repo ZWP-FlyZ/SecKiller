@@ -9,6 +9,7 @@ import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Method;
@@ -22,6 +23,7 @@ import java.lang.reflect.Method;
  **/
 @Component
 @Aspect
+@Order(1)
 public class DynamicDatasourceAspect {
     private final static Logger LOGGER  = LoggerFactory.getLogger(DynamicDatasourceAspect.class);
 
