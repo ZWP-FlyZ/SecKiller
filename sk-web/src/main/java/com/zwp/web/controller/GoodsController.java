@@ -61,7 +61,7 @@ public class GoodsController {
 //        System.err.println(goods.toString());
         if(result.hasErrors()||checkSeckillerTime(goods)){
             LOGGER.info("Error SkGoods Data");
-            res = ResponseResult.build(ResultStatus.INCURRECT_SK_GOODS_INFO);
+            res = ResponseResult.build(ResultStatus.INCORRECT_SK_GOODS_INFO);
             res.setData("秒杀货物注册数据不正确或者安排秒杀的时间不合适");
         }else{
             SkGoodsVo vo = generateGoodsVo(goods);
@@ -83,11 +83,11 @@ public class GoodsController {
 
         ResponseResult<SkGoodsVo> res = null;
         if(goodsId==null||goodsId<0)
-            res = ResponseResult.build(ResultStatus.INCURRECT_SK_GOODS_INFO);
+            res = ResponseResult.build(ResultStatus.INCORRECT_SK_GOODS_INFO);
         else{
             SkGoodsVo vo = gds.getSkGoodsDetailByGoodsId(goodsId);
             if(vo==null)
-                res = ResponseResult.build(ResultStatus.INCURRECT_SK_GOODS_INFO);
+                res = ResponseResult.build(ResultStatus.INCORRECT_SK_GOODS_INFO);
             else
             {
                 res = ResponseResult.build();

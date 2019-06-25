@@ -8,12 +8,10 @@ import com.zwp.comm.utils.PassEncUtils;
 import com.zwp.comm.utils.UserIdUtils;
 import com.zwp.comm.vo.UserAccountVo;
 import com.zwp.service.register.LogOnService;
-import com.zwp.web.security.MyPasswordEncoder;
 import com.zwp.web.vo.LogonVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.util.StreamUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,16 +19,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.imageio.ImageIO;
-import javax.imageio.stream.ImageOutputStream;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.OutputStream;
-import java.nio.file.Files;
-import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -90,7 +84,7 @@ public class LogonController {
             res = ResponseResult.build(ResultStatus.UNVERIFIED);
         else if(result.hasErrors()){
             //不合法注册信息
-            res = ResponseResult.build(ResultStatus.ERROR_REGISTER_INFO);
+            res = ResponseResult.build(ResultStatus.ERROR_UPLOAD_INFO);
             res.setData(result.getAllErrors().get(0).getDefaultMessage());
         }else if(!logonVo.getVerifyCode()
                     .equals(verifyCode)){
