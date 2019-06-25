@@ -19,7 +19,7 @@ public enum ResultStatus {
     ERROR_VERIFY_CODE(2502,"验证码错误"),
     EXIT_USERNAME(2503,"用户名已存在"),
 
-    INCURRENT_SKGOODS_INFO(3000,"错误货物数据");
+    INCURRECT_SK_GOODS_INFO(3000,"错误货物数据");
 
 
 

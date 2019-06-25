@@ -29,6 +29,6 @@ public interface GoodsMapper {
 
      Integer insertSkGoodsDetail(SkGoodsVo goods);
 
-
+     SkGoodsVo selectSkGoodsDetailByGoodsId(Long goodsId);
 
 }

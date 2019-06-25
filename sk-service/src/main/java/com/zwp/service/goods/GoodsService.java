@@ -56,5 +56,11 @@ public class GoodsService {
             throw new IllegalStateException("Add goods error! Something wrong with inserting goods ito Database ");
     }
 
+//    @UseDatasource(DataSourceType.READ_DATASOURCE)
+    @UseDatasource(DataSourceType.WRITE_DATASOURCE) // 注意
+    public SkGoodsVo getSkGoodsDetailByGoodsId(Long goodsId){
+        return goodsMapper.selectSkGoodsDetailByGoodsId(goodsId);
+    }
+
 
 }

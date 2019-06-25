@@ -12,6 +12,10 @@
         <result column="goods_sk_cur_stock" property="goodsSkCurStock"/>
         <result column="sk_start_time" property="startTime"/>
         <result column="sk_end_time" property="endTime"/>
+        <result column="goods_detail" property="goodsDetail"/>
+        <result column="goods_img" property="goodsImgPath"/>
+        <result column="goods_price" property="goodsPrice"/>
+        <result column="goods_stock" property="goodsStock"/>
     </resultMap>
 
     <sql id="TABLE_NAME_SK_GOODS">sk_goods</sql>
@@ -22,6 +26,12 @@
     </sql>
     <sql id="TABLE_PARAM_GOODS_DETAIL">
         goods_id,goods_name, goods_detail,goods_img,goods_price,goods_stock
+    </sql>
+    <sql id="TABLE_PARAM_ALL">
+        sg.goods_id,sg.goods_name,
+        goods_sk_price,goods_sk_stock,
+        goods_sk_cur_stock,sk_start_time,sk_end_time,
+        goods_detail,goods_img,goods_price,goods_stock
     </sql>
     <select id="selectSkGoodsList" resultMap="skGoodsResultMap">
         SELECT * FROM
@@ -49,5 +59,14 @@
     </insert>
 
 
+    <select id="selectSkGoodsDetailByGoodsId" resultMap="skGoodsResultMap">
+    SELECT <include refid="TABLE_PARAM_ALL"/> FROM
+        (SELECT * FROM <include refid="TABLE_NAME_SK_GOODS"/>
+            WHERE goods_id = #{goodsId} LIMIT 1) as sg
+        LEFT JOIN
+        (SELECT * FROM <include refid="TABLE_NAME_GOODS_DETAIL"/>
+            WHERE goods_id = #{goodsId} LIMIT 1) as gd
+        ON (sg.goods_id = gd.goods_id);
+    </select>
 
 </mapper>

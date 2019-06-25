@@ -16,6 +16,8 @@ import javax.validation.constraints.*;
 @Data
 public class AddSkGoodsVo {
 
+    private Long goodsId;
+
     @NotNull(message = "goods name is null")
     @Size(min=1,message = "the length of goods name is less 1!")
     private String goodsName;
