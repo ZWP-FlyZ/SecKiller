@@ -10,7 +10,7 @@ import org.apache.ibatis.annotations.*;
  * @create: 2019-06-22 12:06
  * @version: v1.0
  **/
-
+@Mapper
 public interface LoginMapper {
 
 

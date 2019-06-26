@@ -1,6 +1,7 @@
 package com.zwp.repo.mybatis.mappers;
 
 import com.zwp.comm.vo.UserAccountVo;
+import org.apache.ibatis.annotations.Mapper;
 
 /**
  * @program: seckiller
@@ -9,6 +10,7 @@ import com.zwp.comm.vo.UserAccountVo;
  * @create: 2019-06-22 12:27
  * @version: v1.0
  **/
+@Mapper
 public interface LogonMapper {
 
     /**

@@ -1,6 +1,7 @@
 package com.zwp.repo.mybatis.mappers;
 
 import com.zwp.comm.vo.SkGoodsVo;
+import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
@@ -11,6 +12,7 @@ import java.util.List;
  * @create: 2019-06-24 10:10
  * @version: v1.0
  **/
+@Mapper
 public interface GoodsMapper {
 
     /**

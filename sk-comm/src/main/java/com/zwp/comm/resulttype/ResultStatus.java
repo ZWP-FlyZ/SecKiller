@@ -21,7 +21,9 @@ public enum ResultStatus {
 
     INCORRECT_SK_GOODS_INFO(3000,"错误货物数据"),
 
-    ERROR_SK_PATH(3001,"秒杀令牌错误");
+    ERROR_SK_PATH(3001,"秒杀令牌错误"),
+    REPEAT_SK_REQUEST(3002,"重复秒杀请求"),
+    SK_OVER(3003,"秒杀结束");
 
 
 
