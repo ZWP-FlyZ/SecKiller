@@ -7,7 +7,8 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.autoconfigure.session.SessionAutoConfiguration;
 
 @SpringBootApplication(scanBasePackages={"com.zwp"},
-						exclude = {DataSourceAutoConfiguration.class})
+						exclude = {DataSourceAutoConfiguration.class,
+									RedisAutoConfiguration.class})
 public class SkWebApplication {
 
 	public static void main(String[] args) {
