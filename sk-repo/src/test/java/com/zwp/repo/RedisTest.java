@@ -40,14 +40,14 @@ public class RedisTest {
 
     @Test
     public void readwriteTest(){
-        byte[] v1 = readFactory.getConnection().get("zwp".getBytes());
-        System.err.println(new String(v1));
-
-        byte[] v2 = writeFactory.getConnection().get("z".getBytes());
-        System.err.println(new String(v2));
-
-        System.err.println(readerTemp.opsForValue().get("zwp"));
-        System.err.println(readerTemp.opsForValue().get("z"));
+//        byte[] v1 = readFactory.getConnection().get("zwp".getBytes());
+////        System.err.println(new String(v1));
+////
+////        byte[] v2 = writeFactory.getConnection().get("z".getBytes());
+////        System.err.println(new String(v2));
+////
+////        System.err.println(readerTemp.opsForValue().get("zwp"));
+////        System.err.println(readerTemp.opsForValue().get("z"));
     }
 
 

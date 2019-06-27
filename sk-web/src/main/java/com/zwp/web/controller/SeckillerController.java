@@ -46,13 +46,11 @@ import java.util.concurrent.TimeUnit;
 public class SeckillerController {
 
     //
-    private final static String PERFIX_SK_VERIFY_CODE = "SK_VERIFY_CODE_GOODS_";
-    private final static String PERIX_SK_PATH = "SK_PATH_GOODS_";
+    private final static String PREFIX_SK_VERIFY_CODE = "SK_VERIFY_CODE_GOODS_";
+    private final static String PREFIX_SK_PATH = "SK_PATH_GOODS_";
 
     private final static Logger LOGGER = LoggerFactory.getLogger(SeckillerController.class);
-
-
-
+    
 
     @Autowired
     SeckillService seckillService;
@@ -67,6 +65,7 @@ public class SeckillerController {
 
     //本地秒杀结束标志，阻止多余连接
     // concurrenthashmap 线程安全
+    @Autowired
     @Qualifier("overFlag")
     Map<Long,Boolean> overFlag;
 
@@ -95,7 +94,7 @@ public class SeckillerController {
         if(img==null)
                 return ResponseResult.build(ResultStatus.EXCEPTION);
         ImageIO.write(img,"JPEG",response.getOutputStream());
-        sess.setAttribute(PERFIX_SK_VERIFY_CODE+goodsId,vfc);
+        sess.setAttribute(PREFIX_SK_VERIFY_CODE+goodsId,vfc);
         return ResponseResult.build();
     }
 
@@ -112,7 +111,7 @@ public class SeckillerController {
                                             String verifyCode){
         if(goodsId==null||verifyCode==null)
             return ResponseResult.build(ResultStatus.ERROR_UPLOAD_INFO);
-        String key = PERFIX_SK_VERIFY_CODE+goodsId;
+        String key = PREFIX_SK_VERIFY_CODE+goodsId;
         String vfc = (String)sess.getAttribute(key);
         if(vfc==null)// 未曾请求验证码
             return ResponseResult.build(ResultStatus.UNVERIFIED);
@@ -124,7 +123,7 @@ public class SeckillerController {
             UserAccountDetails user =  getUserAccount();
             String skp = generateSecKillerPath(user.getUsername(),goodsId);
             LOGGER.debug("user:{} goods:{} skpath:{}",user.getUsername(),goodsId,skp);
-            sess.setAttribute(PERIX_SK_PATH+goodsId,skp);
+            sess.setAttribute(PREFIX_SK_PATH+goodsId,skp);
             sess.removeAttribute(key);
             ResponseResult<String> res = ResponseResult.build();
             res.setData(skp);
@@ -147,7 +146,7 @@ public class SeckillerController {
 
         if(Objects.isNull(skPath)||Objects.isNull(goodsId))
             return ResponseResult.build(ResultStatus.ERROR_UPLOAD_INFO);
-        String key = PERIX_SK_PATH+goodsId;
+        String key = PREFIX_SK_PATH+goodsId;
         String skp = (String)sess.getAttribute(key);
 
         if(skp==null){// 未曾获取秒杀令牌
@@ -182,8 +181,8 @@ public class SeckillerController {
 
         // 检查是否用户已经秒杀成功并创建订单
         // 注意 系统认为任何用户都只能秒杀成功同一货物一次。
-        if(seckillService.checkSeckillSuccess(user.getUsername(),goodsId)){
-            LOGGER.debug("Order created but repeat  eclill request: user[{}] - goodsId[{}]",
+        if(seckillService.checkSeckillSuccess(user.getUsername(),goodsId)>0){
+            LOGGER.debug("Order created but repeat  seckill request: user[{}] - goodsId[{}]",
                                     user.getUsername(),goodsId);
             return ResponseResult.build(ResultStatus.REPEAT_SK_REQUEST);
         }
@@ -195,9 +194,7 @@ public class SeckillerController {
             LOGGER.debug("goods [{}] seckill over rem:[{}]",goodsId,rem);
             return ResponseResult.build(ResultStatus.SK_OVER);
         }
-
         // 消息队列中提交秒杀请求
-
         return ResponseResult.build();
     }
 
@@ -218,7 +215,7 @@ public class SeckillerController {
         sb.append("0*0").append(goodsId);
         String v = sb.toString();
         v = MD5.encode(v);v = MD5.encode(v+"HI,DECODER:)!");
-        return v.substring(0,15);
+        return v.substring(5,20);
     }
 
     /**
@@ -229,7 +226,7 @@ public class SeckillerController {
     private String generateVerifyCode(String username){
         String v = "* *0* 00 * "+username+"*0*"+System.currentTimeMillis();
         v = MD5.encode(v);v = MD5.encode("1234"+v);
-        return v.substring(0,5);
+        return v.substring(20,25);
     }
 
 
