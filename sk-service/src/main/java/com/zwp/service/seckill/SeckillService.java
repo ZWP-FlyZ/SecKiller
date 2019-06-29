@@ -1,11 +1,9 @@
 package com.zwp.service.seckill;
 
-import com.google.gson.Gson;
 import com.zwp.comm.resulttype.ResultStatus;
 import com.zwp.comm.utils.JsonUtils;
 import com.zwp.comm.utils.UserIdUtils;
 import com.zwp.comm.vo.SkOrderVo;
-import com.zwp.repo.mybatis.mappers.OrderMapper;
 import com.zwp.service.goods.GoodsService;
 import com.zwp.service.order.OrderService;
 import org.slf4j.Logger;
@@ -157,7 +155,7 @@ public class SeckillService {
         Integer res;
         if(v!=null&&(res=Integer.valueOf(v))>0){
             LOGGER.debug("user:[{}] is success created order for " +
-                    "goods:[{}] orders count:{}.",username,goodsId,res);
+                    "goods:[{}].",username,goodsId);
             return res;
         }else
             return 0;//秒杀不成功
@@ -174,6 +172,34 @@ public class SeckillService {
         Long rem = redisWriterTemp.opsForValue().decrement(key);
         LOGGER.debug("goods:[{}] remain:[{}].",goodsId,rem);
         return rem.intValue();
+    }
+
+
+    /**
+     * 检查是否秒杀成功，
+     * @param username
+     * @param goodsId
+     * @return 如果秒杀成功返回订单，否则返回null
+     */
+    public SkOrderVo checkSkSuccessAndGetOrder(String username,Long goodsId){
+        Assert.notNull(username,"userId is null");
+        Assert.notNull(goodsId,"goodsId is null");
+        //首先检查缓存是否存在
+        SkOrderVo res =null;
+        String keyorder = SECKILL_SUCCESS_ORDER_PREFIX +"["+username+"]->["+goodsId+"]";
+        String json = redisReaderTemp.opsForValue().get(keyorder);
+
+        if(json!=null) return (SkOrderVo)JsonUtils.fromJson(json);
+        else{
+            res = orderService.getSkOrderByUIdAndGoodsId(UserIdUtils.getUserId(username),goodsId);
+            // 将订单重新加入到缓存中
+            if(res!=null)
+                redisWriterTemp.opsForValue().set(keyorder,
+                        JsonUtils.toJson(res),
+                        defaultSuccessStatusTimeout,
+                        TimeUnit.SECONDS);
+        }
+        return res;
     }
 
 

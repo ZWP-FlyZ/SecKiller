@@ -4,6 +4,9 @@ import com.google.common.util.concurrent.RateLimiter;
 import com.zwp.comm.resulttype.ResponseResult;
 import com.zwp.comm.resulttype.ResultStatus;
 import com.zwp.comm.utils.MD5;
+import com.zwp.comm.vo.SeckillMessageVo;
+import com.zwp.comm.vo.SkOrderVo;
+import com.zwp.service.rabbitmq.RabbitMqSendService;
 import com.zwp.service.seckill.SeckillService;
 import com.zwp.web.vo.UserAccountDetails;
 import org.slf4j.Logger;
@@ -49,6 +52,10 @@ public class SeckillerController {
 
     @Autowired
     SeckillService seckillService;
+
+    @Autowired
+    RabbitMqSendService mqSendService;
+
 
     //最大限流数
     private Double maxPermits=100.0;
@@ -189,9 +196,34 @@ public class SeckillerController {
             LOGGER.debug("goods [{}] seckill over rem:[{}]",goodsId,rem);
             return ResponseResult.build(ResultStatus.SK_OVER);
         }
+
         // 消息队列中提交秒杀请求
+        SeckillMessageVo message = new SeckillMessageVo();
+        message.setUsername(user.getUsername());
+        message.setGoodsId(goodsId);
+        mqSendService.sendSeckillMessage(message);// 发送消息
+
         return ResponseResult.build();
     }
+
+    /**
+     * 检查秒杀结果
+     * @param goodsId
+     * @return
+     */
+    @GetMapping("/seckill_result")
+    public ResponseResult<SkOrderVo> checkSkResult(Long goodsId){
+        if(Objects.isNull(goodsId))
+            return ResponseResult.build(ResultStatus.ERROR_UPLOAD_INFO);
+        UserAccountDetails user = getUserAccount();
+        SkOrderVo order = seckillService.checkSkSuccessAndGetOrder(user.getUsername(),goodsId);
+        if(order==null)
+            return ResponseResult.build(ResultStatus.SK_OVER);
+        ResponseResult<SkOrderVo> res = ResponseResult.build();
+        res.setData(order);
+        return res;
+    }
+
 
 
 
