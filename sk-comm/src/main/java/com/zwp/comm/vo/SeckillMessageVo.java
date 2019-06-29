@@ -13,7 +13,7 @@ import java.io.Serializable;
  **/
 @NoArgsConstructor
 @AllArgsConstructor
-public class SeckillMessage implements Serializable {
+public class SeckillMessageVo implements Serializable {
 
     private static final long serialVersionUID = -4083463748853059744L;
     @Getter @Setter private String username;

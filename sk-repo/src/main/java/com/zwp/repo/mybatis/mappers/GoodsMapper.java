@@ -28,9 +28,13 @@ public interface GoodsMapper {
      */
      Integer insertSkGoods(SkGoodsVo goods);
 
-
      Integer insertSkGoodsDetail(SkGoodsVo goods);
 
      SkGoodsVo selectSkGoodsDetailByGoodsId(Long goodsId);
 
+    /**
+     * 减少库存
+     * @return
+     */
+     Integer decSkGoods(SkGoodsVo goods);
 }

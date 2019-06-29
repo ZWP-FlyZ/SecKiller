@@ -1,13 +1,12 @@
 package com.zwp.service.rabbitmq;
 
 import com.zwp.comm.enums.MqKeys;
-import com.zwp.comm.vo.SeckillMessage;
+import com.zwp.comm.vo.SeckillMessageVo;
 import com.zwp.service.seckill.SeckillService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.rabbit.annotation.RabbitHandler;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
-import org.springframework.amqp.rabbit.annotation.RabbitListeners;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -29,7 +28,7 @@ public class SeckillMessageListener {
      * @param message
      */
     @RabbitHandler
-    public void seckillProcess(SeckillMessage message){
+    public void seckillProcess(SeckillMessageVo message){
         ss.doSecKill(message.getUsername(),message.getGoodsId());
     }
 

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zwp.repo.mybatis.mappers.OrderMapper">
+
+    <resultMap id="orderResultMap" type="com.zwp.comm.vo.SkOrderVo">
+        <id column="order_id" property="orderId"/>
+        <result column="user_id" property="userId"/>
+        <result column="goods_id" property="goodsId"/>
+        <result column="goods_name" property="goodsName"/>
+        <result column="goods_price" property="goodsPrice"/>
+        <result column="goods_count" property="goodsCot"/>
+        <result column="order_status" property="orderStatus"/>
+        <result column="order_crt_time" property="createTime"/>
+        <result column="order_pay_time" property="payTime"/>
+        <result column="order_addr" property="orderAddr"/>
+    </resultMap>
+
+    <sql id="TABLE_NAME_SK_ORDER">sk_order</sql>
+    <sql id="TABLE_NAME_ORDER_INFO">order_info</sql>
+    <insert id="insertSkOrder" parameterType="com.zwp.comm.vo.SkOrderVo"
+            keyColumn="order_id" keyProperty="orderId" useGeneratedKeys="true">
+        INSERT IGNORE INTO <include refid="TABLE_NAME_SK_ORDER"/>
+        (user_id,goods_id)
+        VALUES
+        (#{userId},#{goodsId})
+    </insert>
+
+    <sql id="TABLE_PARAM_ORDER_INFO">
+        order_id,user_id,goods_id,goods_name,goods_price,goods_count,order_status,
+        order_crt_time,order_pay_time,order_addr
+    </sql>
+    <insert id="insertOrderInfo" parameterType="com.zwp.comm.vo.SkOrderVo">
+        INSERT  INTO <include refid="TABLE_NAME_ORDER_INFO"/>
+        (<include refid="TABLE_PARAM_ORDER_INFO"/>)
+        SELECT #{orderId},#{userId},#{goodsId},sg.goods_name,sg.goods_sk_price,
+            #{goodsCot},#{orderStatus},#{createTime},#{payTime},#{orderAddr}
+        FROM sk_goods as sg WHERE sg.goods_id = #{goodsId}
+    </insert>
+
+    <select id="selectOrderByOrderId" resultMap="orderResultMap">
+        SELECT * FROM <include refid="TABLE_NAME_ORDER_INFO"/>
+        WHERE order_id = #{orderId} limit 1
+    </select>
+
+    <select id="selectSkOrderByUIdAndGoodsId" resultMap="orderResultMap">
+        SELECT * FROM <include refid="TABLE_NAME_ORDER_INFO"/>
+        WHERE user_id = #{userId} and goods_id = #{goods_id} limit 1
+    </select>
+
+</mapper>

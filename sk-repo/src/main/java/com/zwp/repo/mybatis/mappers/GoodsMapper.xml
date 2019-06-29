@@ -69,4 +69,11 @@
         ON (sg.goods_id = gd.goods_id);
     </select>
 
+    <update id="decSkGoods" parameterType="com.zwp.comm.vo.SkGoodsVo">
+        UPDATE <include refid="TABLE_NAME_SK_GOODS"/> SET
+        goods_sk_cur_stock = goods_sk_cur_stock-1
+        WHERE goods_id = #{goodsId} AND  goods_sk_cur_stock>0
+    </update>
+
+
 </mapper>

@@ -1,10 +1,9 @@
 package com.zwp.service.rabbitmq;
 
 import com.zwp.comm.enums.MqKeys;
-import com.zwp.comm.vo.SeckillMessage;
+import com.zwp.comm.vo.SeckillMessageVo;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 /**
  * @program: seckiller
@@ -23,7 +22,7 @@ public class RabbitMqSendService {
      * 向消息队列中添加秒杀请求的消息
      * @param msg
      */
-    public void sendSeckillMessage(SeckillMessage msg){
+    public void sendSeckillMessage(SeckillMessageVo msg){
         template.convertAndSend(MqKeys.SECKILL_EXCHANGE,
                                 MqKeys.SECKILL_QUEUE,
                                 msg);

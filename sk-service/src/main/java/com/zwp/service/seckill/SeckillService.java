@@ -1,6 +1,13 @@
 package com.zwp.service.seckill;
 
+import com.google.gson.Gson;
 import com.zwp.comm.resulttype.ResultStatus;
+import com.zwp.comm.utils.JsonUtils;
+import com.zwp.comm.utils.UserIdUtils;
+import com.zwp.comm.vo.SkOrderVo;
+import com.zwp.repo.mybatis.mappers.OrderMapper;
+import com.zwp.service.goods.GoodsService;
+import com.zwp.service.order.OrderService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,10 +39,15 @@ public class SeckillService {
     private final static String SECKILL_STATUS_PREFIX = "seckill_status:";
     // 表明当前用户成功秒杀某一货物
     private final static String SECKILL_SUCCESS_PREFIX = "seckill_success:";
+    // 订单缓存
+    private final static String SECKILL_SUCCESS_ORDER_PREFIX = "seckill_success:";
 
     private final static String SECKILL_GOODS_COT_PREFIX= "seckill_goods_cot:";
     // 处于秒杀某一货物状态 状态清除时间
     private final static Long defaultSeckillStatusTimeout = 1800L;
+
+    // 处于秒杀某一货物状态 状态清除时间
+    private final static Long defaultSuccessStatusTimeout = 12*3600L;
 
 
     @Autowired
@@ -50,6 +62,12 @@ public class SeckillService {
     StringRedisTemplate redisWriterTemp;
 
 
+    @Autowired
+    OrderService orderService;
+
+    @Autowired
+    GoodsService goodsService;
+
     /**
      * 通过验证码生成验证图片
      * @param verifyCode
@@ -61,8 +79,44 @@ public class SeckillService {
         return ImageIO.read(res.getInputStream());
     }
 
+    /**
+     * 在持久层处理秒杀义务，更新数据库
+     * @param username
+     * @param goodsId
+     * @return
+     */
     public ResultStatus doSecKill(String username,Long goodsId){
-            return null;
+        Assert.notNull(username,"userId is null");
+        Assert.notNull(goodsId,"goodsId is null");
+        ResultStatus res = null;
+        SkOrderVo order =new SkOrderVo();
+        order.setUserId(UserIdUtils.getUserId(username));
+        order.setGoodsId(goodsId);
+        if(!goodsService.desrGoodsStock(goodsId)){
+            //数据库减库存失败，已经没有库存
+            LOGGER.debug("username:{} goodsId:{} out of stock in database!",username,goodsId);
+            return ResultStatus.SK_OVER;
+        }
+
+        if(orderService.createOrder(order)){
+            //设置秒杀成功标记
+            String key = SECKILL_SUCCESS_PREFIX +"["+username+"]->["+goodsId+"]";
+            redisWriterTemp.opsForValue().set(key,"1",
+                    defaultSuccessStatusTimeout,TimeUnit.SECONDS);
+            // 创建订单成功
+            String keyorder = SECKILL_SUCCESS_ORDER_PREFIX +"["+username+"]->["+goodsId+"]";
+            res= ResultStatus.SUCCESS;
+            //将订单信息存储在缓存中
+            redisWriterTemp.opsForValue().set(keyorder,
+                                            JsonUtils.toJson(order),
+                                            defaultSuccessStatusTimeout,
+                                            TimeUnit.SECONDS);
+        }else{
+            // 订单已经存在
+            res=ResultStatus.REPEAT_SK_REQUEST;
+            LOGGER.debug("username:{} goodsId:{} has already created order!",username,goodsId);
+        }
+        return res;
     }
 
 
@@ -76,11 +130,11 @@ public class SeckillService {
         // 注意最好在该服务中设置自动清除秒杀状态缓存的功能
         String key = SECKILL_STATUS_PREFIX +"["+username+"]->["+goodsId+"]";
         Long v = redisWriterTemp.opsForValue().increment(key); // 自增
+        redisWriterTemp.expire(key,defaultSeckillStatusTimeout, TimeUnit.SECONDS);
         boolean res = true;
         if(v==1){
             LOGGER.debug("Success set in seckill status user:[{}] goods:[{}]",username,goodsId);
             // 刚处于秒杀某物品的阶段
-            redisWriterTemp.expire(key,defaultSeckillStatusTimeout, TimeUnit.SECONDS);
         }else if(v>1){
             // 已经处于秒杀某物品阶段
             LOGGER.debug("user:[{}] is in seckill status! " +
@@ -121,6 +175,8 @@ public class SeckillService {
         LOGGER.debug("goods:[{}] remain:[{}].",goodsId,rem);
         return rem.intValue();
     }
+
+
 
 
 }

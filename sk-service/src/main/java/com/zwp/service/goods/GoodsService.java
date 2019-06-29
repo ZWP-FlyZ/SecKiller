@@ -63,4 +63,12 @@ public class GoodsService {
     }
 
 
+    public boolean desrGoodsStock(Long goodsIs){
+        SkGoodsVo goodsVo = new SkGoodsVo();
+        goodsVo.setGoodsId(goodsIs);
+        return goodsMapper.decSkGoods(goodsVo)>0;
+    }
+
+
+
 }
