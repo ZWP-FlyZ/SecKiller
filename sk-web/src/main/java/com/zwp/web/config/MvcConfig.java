@@ -20,14 +20,6 @@ import java.util.concurrent.ConcurrentHashMap;
 public class MvcConfig {
 
 
-    /**
-     * 本地缓存，存储某一货物是否已经秒杀结束，
-     * 注意需要定时清理该缓存
-     * @return
-     */
-    @Bean("overFlag")
-    public Map<Long,Boolean> overFlag(){
-        return new ConcurrentHashMap<>();
-    }
+
 
 }

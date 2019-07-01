@@ -3,6 +3,7 @@ package com.zwp.service.seckill;
 import com.zwp.comm.resulttype.ResultStatus;
 import com.zwp.comm.utils.JsonUtils;
 import com.zwp.comm.utils.UserIdUtils;
+import com.zwp.comm.vo.SkGoodsVo;
 import com.zwp.comm.vo.SkOrderVo;
 import com.zwp.service.goods.GoodsService;
 import com.zwp.service.order.OrderService;
@@ -40,7 +41,7 @@ public class SeckillService {
     // 订单缓存
     private final static String SECKILL_SUCCESS_ORDER_PREFIX = "seckill_success:";
 
-    private final static String SECKILL_GOODS_COT_PREFIX= "seckill_goods_cot:";
+    public final static String SECKILL_GOODS_COT_PREFIX= "seckill_goods_cot:";
     // 处于秒杀某一货物状态 状态清除时间
     private final static Long defaultSeckillStatusTimeout = 1800L;
 
@@ -200,6 +201,27 @@ public class SeckillService {
                         TimeUnit.SECONDS);
         }
         return res;
+    }
+
+
+    /**
+     * 将秒杀货物的数量加入到缓存中
+     * @param goodsVo
+     * @return
+     */
+    public void addGoodsCotToCache(SkGoodsVo goodsVo){
+        String key = SECKILL_GOODS_COT_PREFIX+"["+goodsVo.getGoodsId()+"]";
+        redisWriterTemp.opsForValue().set(key,goodsVo.getGoodsSkStock()+"");
+    }
+
+    /**
+     * 将秒杀货物的数量从缓存中移除
+     * @param goodsVo
+     * @return
+     */
+    public boolean deleteGoodsCotToCache(SkGoodsVo goodsVo){
+        String key = SECKILL_GOODS_COT_PREFIX+"["+goodsVo.getGoodsId()+"]";
+        return redisWriterTemp.delete(key);
     }
 
 

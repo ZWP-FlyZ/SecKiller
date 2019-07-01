@@ -108,15 +108,15 @@ public class GoodsController {
         LocalDateTime startDate = null,endDate;
         try {
             startDate = LocalDateTime.parse(goods.getStartTime(), fmt);
-            endDate = LocalDateTime.parse(goods.getStartTime(), fmt);
+            endDate = LocalDateTime.parse(goods.getEndTime(), fmt);
             LocalDateTime t = endDate.plusMinutes(-1);
-            if(startDate.isBefore(t)||startDate.isEqual(t))// 结束时间必须比开始时间迟1min
+            if(startDate.isAfter(t))// 结束时间必须比开始时间迟1min
                 throw new IllegalArgumentException("endTime - startTime < 1 minute");
         }catch (Exception e){
             LOGGER.debug("SkTime format error!",e);
             return true;
         }
-        LocalDateTime nowP1 = LocalDateTime.now().plusHours(1);
+        LocalDateTime nowP1 = LocalDateTime.now().plusHours(0);
         if(startDate.isBefore(nowP1)||
                 startDate.equals(nowP1))// 必须提前一小时注册秒杀,否则不通过
             return true;

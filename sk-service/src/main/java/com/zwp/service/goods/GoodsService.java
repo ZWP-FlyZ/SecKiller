@@ -29,6 +29,9 @@ public class GoodsService {
     @Autowired
     GoodsMapper goodsMapper;
 
+    @Autowired
+    SkGoodsCacheService cacheService;
+
     /**
      * 获得货物列表
      * @return
@@ -51,13 +54,17 @@ public class GoodsService {
 //        throw new IllegalArgumentException("test");
         v+= goodsMapper.insertSkGoodsDetail(goods);
         if(v==2) // 两表同时插入成功
+        {
+            //货物注册成功后，添加定时管理货物计数的任务
+            cacheService.createSkGoodsStockTask(goods);
             return ResultStatus.SUCCESS;
+        }
         else    // 否则报异常，事务回滚
             throw new IllegalStateException("Add goods error! Something wrong with inserting goods ito Database ");
     }
 
-//    @UseDatasource(DataSourceType.READ_DATASOURCE)
-    @UseDatasource(DataSourceType.WRITE_DATASOURCE) // 注意
+    @UseDatasource(DataSourceType.READ_DATASOURCE)
+//    @UseDatasource(DataSourceType.WRITE_DATASOURCE) // 注意
     public SkGoodsVo getSkGoodsDetailByGoodsId(Long goodsId){
         return goodsMapper.selectSkGoodsDetailByGoodsId(goodsId);
     }

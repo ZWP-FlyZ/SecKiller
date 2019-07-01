@@ -26,4 +26,6 @@ public class MqTest {
         service.sendStringMessage("hi mq test");
     }
 
+
+
 }
