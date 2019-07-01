@@ -1,6 +1,7 @@
 package com.zwp.service.register;
 
 import com.zwp.comm.resulttype.ResultStatus;
+import com.zwp.comm.utils.VerifyCodeUtils;
 import com.zwp.comm.vo.UserAccountVo;
 import com.zwp.repo.datasourceconfig.DataSourceType;
 import com.zwp.repo.datasourceconfig.UseDatasource;
@@ -41,8 +42,9 @@ public class LogOnService {
      * @return
      */
     public BufferedImage getVerifyImage(String verifyCode) throws IOException {
-        Resource res =ctx.getResource("classpath:static/background.jpg");
-        return ImageIO.read(res.getInputStream());
+//        Resource res =ctx.getResource("classpath:static/background.jpg");
+        return VerifyCodeUtils.generateVerifyPicture(verifyCode);
+
     }
 
 

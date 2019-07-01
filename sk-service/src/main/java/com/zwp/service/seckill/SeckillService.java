@@ -3,6 +3,7 @@ package com.zwp.service.seckill;
 import com.zwp.comm.resulttype.ResultStatus;
 import com.zwp.comm.utils.JsonUtils;
 import com.zwp.comm.utils.UserIdUtils;
+import com.zwp.comm.utils.VerifyCodeUtils;
 import com.zwp.comm.vo.SkGoodsVo;
 import com.zwp.comm.vo.SkOrderVo;
 import com.zwp.service.goods.GoodsService;
@@ -74,8 +75,7 @@ public class SeckillService {
      */
     public BufferedImage getVerifyImageByCode(String verifyCode) throws IOException {
         Assert.notNull(verifyCode,"the verifyCode is null");
-        Resource res =ctx.getResource("classpath:static/background.jpg");
-        return ImageIO.read(res.getInputStream());
+        return VerifyCodeUtils.generateVerifyPicture(verifyCode);
     }
 
     /**
