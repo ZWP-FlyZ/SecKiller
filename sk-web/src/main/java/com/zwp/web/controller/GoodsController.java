@@ -5,9 +5,12 @@ import com.zwp.comm.resulttype.ResultStatus;
 import com.zwp.comm.vo.SkGoodsVo;
 import com.zwp.service.goods.GoodsService;
 import com.zwp.web.vo.AddSkGoodsVo;
+import lombok.Getter;
+import lombok.Setter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -28,6 +31,7 @@ import java.util.List;
  **/
 @RestController
 @RequestMapping("/skgoods")
+@ConfigurationProperties("sk.goods")
 public class GoodsController {
 
     private final static Logger LOGGER = LoggerFactory.getLogger(GoodsController.class);
@@ -37,7 +41,12 @@ public class GoodsController {
     @Autowired
     GoodsService gds;
 
-
+    // 单位小时
+    @Getter @Setter
+    Integer regGoodsLimitBeforeStart =0;
+    // 秒杀开始与时间间隔最小差，单位秒
+    @Getter @Setter
+    Integer mimStartEndTimeInterval=60;
 
     /**
      * 返回秒杀货物，
@@ -109,14 +118,14 @@ public class GoodsController {
         try {
             startDate = LocalDateTime.parse(goods.getStartTime(), fmt);
             endDate = LocalDateTime.parse(goods.getEndTime(), fmt);
-            LocalDateTime t = endDate.plusMinutes(-1);
+            LocalDateTime t = endDate.plusSeconds(-mimStartEndTimeInterval);
             if(startDate.isAfter(t))// 结束时间必须比开始时间迟1min
                 throw new IllegalArgumentException("endTime - startTime < 1 minute");
         }catch (Exception e){
             LOGGER.debug("SkTime format error!",e);
             return true;
         }
-        LocalDateTime nowP1 = LocalDateTime.now().plusHours(0);
+        LocalDateTime nowP1 = LocalDateTime.now().plusHours(regGoodsLimitBeforeStart);
         if(startDate.isBefore(nowP1)||
                 startDate.equals(nowP1))// 必须提前一小时注册秒杀,否则不通过
             return true;

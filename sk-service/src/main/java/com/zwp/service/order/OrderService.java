@@ -10,6 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 /**
  * @program: seckiller
  * @description: 订单相关服务
@@ -20,6 +23,8 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class OrderService {
     private final static Logger LOGGER = LoggerFactory.getLogger(OrderService.class);
+    private final static DateTimeFormatter fmt = DateTimeFormatter
+            .ofPattern("yyyy/MM/dd HH:mm:ss");
 
     @Autowired
     OrderMapper orderMapper;
@@ -33,10 +38,17 @@ public class OrderService {
     @Transactional
     public boolean createOrder(SkOrderVo order){
         LOGGER.debug("create order: {}",order);
+        order.setCreateTime(fmt.format(LocalDateTime.now()));
+        order.setGoodsCot(1);
+        order.setOrderStatus(0);
         Integer res = orderMapper.insertSkOrder(order);
         if(res==0) return false;// 存在
         res = orderMapper.insertOrderInfo(order);
-        return res>0;
+        if(res==0) return false;// 在order_info中存在
+        SkOrderVo neworder = orderMapper.selectOrderByOrderId(order.getOrderId());
+        order.setGoodsName(neworder.getGoodsName());
+        order.setGoodsPrice(neworder.getGoodsPrice());
+        return true;
     }
 
     /**

@@ -21,8 +21,8 @@ public class JsonUtils {
             return g.toJson(o);
     }
 
-    public static <T> T fromJson(String json){
-        return (T)g.fromJson(json,Object.class);
+    public static <T> T fromJson(String json,Class<T> clazz){
+        return g.fromJson(json,clazz);
     }
 
 }

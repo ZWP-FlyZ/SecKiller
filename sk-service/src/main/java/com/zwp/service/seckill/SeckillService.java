@@ -190,7 +190,7 @@ public class SeckillService {
         String keyorder = SECKILL_SUCCESS_ORDER_PREFIX +"["+username+"]->["+goodsId+"]";
         String json = redisReaderTemp.opsForValue().get(keyorder);
 
-        if(json!=null) return (SkOrderVo)JsonUtils.fromJson(json);
+        if(json!=null) return JsonUtils.fromJson(json,SkOrderVo.class);
         else{
             res = orderService.getSkOrderByUIdAndGoodsId(UserIdUtils.getUserId(username),goodsId);
             // 将订单重新加入到缓存中

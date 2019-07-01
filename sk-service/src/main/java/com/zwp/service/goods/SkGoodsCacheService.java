@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.amqp.rabbit.annotation.Queue;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
@@ -27,6 +28,7 @@ import java.util.concurrent.TimeUnit;
  * @version: v1.0
  **/
 @Service
+@ConfigurationProperties("sk.goods.cache")
 public class SkGoodsCacheService {
 
     private final static Logger LOGGER = LoggerFactory.getLogger(SkGoodsCacheService.class);
@@ -37,6 +39,7 @@ public class SkGoodsCacheService {
     // 秒杀开始前若干时间开始添加秒杀货物计数
     private int beforeStartDelta = 10;
 
+    private int afterEndDelta = 10;
     // 时间任务调度器
     private  ScheduledExecutorService poolExecutor = null;
 
@@ -80,7 +83,7 @@ public class SkGoodsCacheService {
             if(delay<0) return false;//为满足添加要求
             poolExecutor.schedule(addTask,delay, TimeUnit.SECONDS);
             LOGGER.info("Add StockCot Task Created!Goods:{} delay:{}",goods,delay);
-            delay = endTime.toEpochSecond(ZoneOffset.UTC) - now.toEpochSecond(ZoneOffset.UTC);
+            delay = endTime.toEpochSecond(ZoneOffset.UTC) - now.toEpochSecond(ZoneOffset.UTC)+afterEndDelta;
             poolExecutor.schedule(deleteTask,delay,TimeUnit.SECONDS);
             LOGGER.info("Delete StockCot Task Created!delay:{}",delay);
             return true;
