@@ -19,7 +19,6 @@ public class VerifyCodeUtils {
     private static int FONT_HIGH=16;//字体高度
     private static  ThreadLocalRandom random = ThreadLocalRandom.current();
 
-
     /**
      * 由给定地验证码生成验证图片
      * @param verifyCode
@@ -47,7 +46,5 @@ public class VerifyCodeUtils {
 
         return image;
     }
-
-
 
 }
