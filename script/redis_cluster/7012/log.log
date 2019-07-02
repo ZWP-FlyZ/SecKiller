@@ -1,0 +1,133 @@
+[19364] 02 Jul 20:23:36.083 # Granting read/write access to 'NT AUTHORITY\NetworkService' on: "E:\work\workspaces\workspaceforIdea\seckiller\script\redis_cluster" "E:\work\workspaces\workspaceforIdea\seckiller\script\redis_cluster" "E:\work\workspaces\workspaceforIdea\seckiller\script\redis_cluster\7012\" 
+[19364] 02 Jul 20:23:36.083 # Redis successfully installed as a service.
+[19448] 02 Jul 20:26:07.226 # HandleServiceCommands: system error caught. error code=1073, message = CreateService failed: unknown error
+
+[19060] 02 Jul 20:35:42.905 # Creating Server TCP listening socket 127.0.0.1:7010: bind: No error
+[16696] 02 Jul 20:38:14.308 # Creating Server TCP listening socket 127.0.0.1:7010: bind: No error
+[19240] 02 Jul 20:45:07.316 # Creating Server TCP listening socket 127.0.0.1:7010: bind: No error
+[12408] 02 Jul 20:46:46.495 * No cluster configuration found, I'm eedce335bf746d99448c69938716f93908fd4e1d
+                _._                                                  
+           _.-``__ ''-._                                             
+      _.-``    `.  `_.  ''-._           Redis 3.2.100 (00000000/0) 64 bit
+  .-`` .-```.  ```\/    _.,_ ''-._                                   
+ (    '      ,       .-`  | `,    )     Running in cluster mode
+ |`-._`-...-` __...-.``-._|'` _.-'|     Port: 7012
+ |    `-._   `._    /     _.-'    |     PID: 12408
+  `-._    `-._  `-./  _.-'    _.-'                                   
+ |`-._`-._    `-.__.-'    _.-'_.-'|                                  
+ |    `-._`-._        _.-'_.-'    |           http://redis.io        
+  `-._    `-._`-.__.-'_.-'    _.-'                                   
+ |`-._`-._    `-.__.-'    _.-'_.-'|                                  
+ |    `-._`-._        _.-'_.-'    |                                  
+  `-._    `-._`-.__.-'_.-'    _.-'                                   
+      `-._    `-.__.-'    _.-'                                       
+          `-._        _.-'                                           
+              `-.__.-'                                               
+
+[12408] 02 Jul 20:46:46.555 # Server started, Redis version 3.2.100
+[12408] 02 Jul 20:46:46.555 * The server is now ready to accept connections on port 7012
+[19760] 02 Jul 20:48:50.161 * Node configuration loaded, I'm eedce335bf746d99448c69938716f93908fd4e1d
+                _._                                                  
+           _.-``__ ''-._                                             
+      _.-``    `.  `_.  ''-._           Redis 3.2.100 (00000000/0) 64 bit
+  .-`` .-```.  ```\/    _.,_ ''-._                                   
+ (    '      ,       .-`  | `,    )     Running in cluster mode
+ |`-._`-...-` __...-.``-._|'` _.-'|     Port: 7012
+ |    `-._   `._    /     _.-'    |     PID: 19760
+  `-._    `-._  `-./  _.-'    _.-'                                   
+ |`-._`-._    `-.__.-'    _.-'_.-'|                                  
+ |    `-._`-._        _.-'_.-'    |           http://redis.io        
+  `-._    `-._`-.__.-'_.-'    _.-'                                   
+ |`-._`-._    `-.__.-'    _.-'_.-'|                                  
+ |    `-._`-._        _.-'_.-'    |                                  
+  `-._    `-._`-.__.-'_.-'    _.-'                                   
+      `-._    `-.__.-'    _.-'                                       
+          `-._        _.-'                                           
+              `-.__.-'                                               
+
+[19760] 02 Jul 20:48:50.161 # Server started, Redis version 3.2.100
+[19760] 02 Jul 20:48:50.162 * The server is now ready to accept connections on port 7012
+[19548] 02 Jul 20:49:06.773 * Node configuration loaded, I'm eedce335bf746d99448c69938716f93908fd4e1d
+                _._                                                  
+           _.-``__ ''-._                                             
+      _.-``    `.  `_.  ''-._           Redis 3.2.100 (00000000/0) 64 bit
+  .-`` .-```.  ```\/    _.,_ ''-._                                   
+ (    '      ,       .-`  | `,    )     Running in cluster mode
+ |`-._`-...-` __...-.``-._|'` _.-'|     Port: 7012
+ |    `-._   `._    /     _.-'    |     PID: 19548
+  `-._    `-._  `-./  _.-'    _.-'                                   
+ |`-._`-._    `-.__.-'    _.-'_.-'|                                  
+ |    `-._`-._        _.-'_.-'    |           http://redis.io        
+  `-._    `-._`-.__.-'_.-'    _.-'                                   
+ |`-._`-._    `-.__.-'    _.-'_.-'|                                  
+ |    `-._`-._        _.-'_.-'    |                                  
+  `-._    `-._`-.__.-'_.-'    _.-'                                   
+      `-._    `-.__.-'    _.-'                                       
+          `-._        _.-'                                           
+              `-.__.-'                                               
+
+[19548] 02 Jul 20:49:06.773 # Server started, Redis version 3.2.100
+[19548] 02 Jul 20:49:06.774 * The server is now ready to accept connections on port 7012
+[20184] 02 Jul 20:49:34.757 * Node configuration loaded, I'm eedce335bf746d99448c69938716f93908fd4e1d
+                _._                                                  
+           _.-``__ ''-._                                             
+      _.-``    `.  `_.  ''-._           Redis 3.2.100 (00000000/0) 64 bit
+  .-`` .-```.  ```\/    _.,_ ''-._                                   
+ (    '      ,       .-`  | `,    )     Running in cluster mode
+ |`-._`-...-` __...-.``-._|'` _.-'|     Port: 7012
+ |    `-._   `._    /     _.-'    |     PID: 20184
+  `-._    `-._  `-./  _.-'    _.-'                                   
+ |`-._`-._    `-.__.-'    _.-'_.-'|                                  
+ |    `-._`-._        _.-'_.-'    |           http://redis.io        
+  `-._    `-._`-.__.-'_.-'    _.-'                                   
+ |`-._`-._    `-.__.-'    _.-'_.-'|                                  
+ |    `-._`-._        _.-'_.-'    |                                  
+  `-._    `-._`-.__.-'_.-'    _.-'                                   
+      `-._    `-.__.-'    _.-'                                       
+          `-._        _.-'                                           
+              `-.__.-'                                               
+
+[20184] 02 Jul 20:49:34.757 # Server started, Redis version 3.2.100
+[20184] 02 Jul 20:49:34.757 * The server is now ready to accept connections on port 7012
+[20244] 02 Jul 20:50:16.718 * Node configuration loaded, I'm eedce335bf746d99448c69938716f93908fd4e1d
+                _._                                                  
+           _.-``__ ''-._                                             
+      _.-``    `.  `_.  ''-._           Redis 3.2.100 (00000000/0) 64 bit
+  .-`` .-```.  ```\/    _.,_ ''-._                                   
+ (    '      ,       .-`  | `,    )     Running in cluster mode
+ |`-._`-...-` __...-.``-._|'` _.-'|     Port: 7012
+ |    `-._   `._    /     _.-'    |     PID: 20244
+  `-._    `-._  `-./  _.-'    _.-'                                   
+ |`-._`-._    `-.__.-'    _.-'_.-'|                                  
+ |    `-._`-._        _.-'_.-'    |           http://redis.io        
+  `-._    `-._`-.__.-'_.-'    _.-'                                   
+ |`-._`-._    `-.__.-'    _.-'_.-'|                                  
+ |    `-._`-._        _.-'_.-'    |                                  
+  `-._    `-._`-.__.-'_.-'    _.-'                                   
+      `-._    `-.__.-'    _.-'                                       
+          `-._        _.-'                                           
+              `-.__.-'                                               
+
+[20244] 02 Jul 20:50:16.718 # Server started, Redis version 3.2.100
+[20244] 02 Jul 20:50:16.718 * The server is now ready to accept connections on port 7012
+[11324] 02 Jul 20:54:25.622 * Node configuration loaded, I'm eedce335bf746d99448c69938716f93908fd4e1d
+                _._                                                  
+           _.-``__ ''-._                                             
+      _.-``    `.  `_.  ''-._           Redis 3.2.100 (00000000/0) 64 bit
+  .-`` .-```.  ```\/    _.,_ ''-._                                   
+ (    '      ,       .-`  | `,    )     Running in cluster mode
+ |`-._`-...-` __...-.``-._|'` _.-'|     Port: 7012
+ |    `-._   `._    /     _.-'    |     PID: 11324
+  `-._    `-._  `-./  _.-'    _.-'                                   
+ |`-._`-._    `-.__.-'    _.-'_.-'|                                  
+ |    `-._`-._        _.-'_.-'    |           http://redis.io        
+  `-._    `-._`-.__.-'_.-'    _.-'                                   
+ |`-._`-._    `-.__.-'    _.-'_.-'|                                  
+ |    `-._`-._        _.-'_.-'    |                                  
+  `-._    `-._`-.__.-'_.-'    _.-'                                   
+      `-._    `-.__.-'    _.-'                                       
+          `-._        _.-'                                           
+              `-.__.-'                                               
+
+[11324] 02 Jul 20:54:25.622 # Server started, Redis version 3.2.100
+[11324] 02 Jul 20:54:25.622 * The server is now ready to accept connections on port 7012

@@ -10,6 +10,7 @@ import lombok.Setter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,7 +32,6 @@ import java.util.List;
  **/
 @RestController
 @RequestMapping("/skgoods")
-@ConfigurationProperties("sk.goods")
 public class GoodsController {
 
     private final static Logger LOGGER = LoggerFactory.getLogger(GoodsController.class);
@@ -42,10 +42,10 @@ public class GoodsController {
     GoodsService gds;
 
     // 单位小时
-    @Getter @Setter
+    @Value("${sk.goods.regGoodsLimitBeforeStart}")
     Integer regGoodsLimitBeforeStart =0;
     // 秒杀开始与时间间隔最小差，单位秒
-    @Getter @Setter
+    @Value("${sk.goods.mimStartEndTimeInterval}")
     Integer mimStartEndTimeInterval=60;
 
     /**
