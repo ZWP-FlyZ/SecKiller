@@ -27,11 +27,11 @@ public class SkServiceApplication implements CommandLineRunner {
 	RabbitMqSendService service;
 
 //
-//	@Scheduled(cron = "0/2 * *  * * ?")
-//	public void send(){
-//		service.sendStringMessage("mmmm");
-//		System.err.println("sent");
-//	}
+////	@Scheduled(cron = "0/2 * *  * * ?")
+////	public void send(){
+////		service.sendStringMessage("mmmm");
+////		System.err.println("sent");
+////	}
 
 	@Override
 	public void run(String... args) throws Exception {
