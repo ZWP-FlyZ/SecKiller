@@ -106,3 +106,24 @@
 
 [4280] 02 Jul 20:54:25.636 # Server started, Redis version 3.2.100
 [4280] 02 Jul 20:54:25.636 * The server is now ready to accept connections on port 7011
+[4204] 03 Jul 19:02:14.034 * Node configuration loaded, I'm 8bcbdc545f28821dc962f86d8e737f44d3a7e085
+                _._                                                  
+           _.-``__ ''-._                                             
+      _.-``    `.  `_.  ''-._           Redis 3.2.100 (00000000/0) 64 bit
+  .-`` .-```.  ```\/    _.,_ ''-._                                   
+ (    '      ,       .-`  | `,    )     Running in cluster mode
+ |`-._`-...-` __...-.``-._|'` _.-'|     Port: 7011
+ |    `-._   `._    /     _.-'    |     PID: 4204
+  `-._    `-._  `-./  _.-'    _.-'                                   
+ |`-._`-._    `-.__.-'    _.-'_.-'|                                  
+ |    `-._`-._        _.-'_.-'    |           http://redis.io        
+  `-._    `-._`-.__.-'_.-'    _.-'                                   
+ |`-._`-._    `-.__.-'    _.-'_.-'|                                  
+ |    `-._`-._        _.-'_.-'    |                                  
+  `-._    `-._`-.__.-'_.-'    _.-'                                   
+      `-._    `-.__.-'    _.-'                                       
+          `-._        _.-'                                           
+              `-.__.-'                                               
+
+[4204] 03 Jul 19:02:14.035 # Server started, Redis version 3.2.100
+[4204] 03 Jul 19:02:14.036 * The server is now ready to accept connections on port 7011

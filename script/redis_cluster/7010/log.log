@@ -301,3 +301,25 @@
 [19664] 02 Jul 20:54:25.613 # Server started, Redis version 3.2.100
 [19664] 02 Jul 20:54:25.613 * DB loaded from disk: 0.000 seconds
 [19664] 02 Jul 20:54:25.613 * The server is now ready to accept connections on port 7010
+[20112] 03 Jul 19:02:14.034 * Node configuration loaded, I'm 37142f3531d1ec16385c3300e5a8c159075e37a1
+                _._                                                  
+           _.-``__ ''-._                                             
+      _.-``    `.  `_.  ''-._           Redis 3.2.100 (00000000/0) 64 bit
+  .-`` .-```.  ```\/    _.,_ ''-._                                   
+ (    '      ,       .-`  | `,    )     Running in cluster mode
+ |`-._`-...-` __...-.``-._|'` _.-'|     Port: 7010
+ |    `-._   `._    /     _.-'    |     PID: 20112
+  `-._    `-._  `-./  _.-'    _.-'                                   
+ |`-._`-._    `-.__.-'    _.-'_.-'|                                  
+ |    `-._`-._        _.-'_.-'    |           http://redis.io        
+  `-._    `-._`-.__.-'_.-'    _.-'                                   
+ |`-._`-._    `-.__.-'    _.-'_.-'|                                  
+ |    `-._`-._        _.-'_.-'    |                                  
+  `-._    `-._`-.__.-'_.-'    _.-'                                   
+      `-._    `-.__.-'    _.-'                                       
+          `-._        _.-'                                           
+              `-.__.-'                                               
+
+[20112] 03 Jul 19:02:14.035 # Server started, Redis version 3.2.100
+[20112] 03 Jul 19:02:14.038 * DB loaded from disk: 0.003 seconds
+[20112] 03 Jul 19:02:14.038 * The server is now ready to accept connections on port 7010
