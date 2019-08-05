@@ -30,7 +30,7 @@ public class UnAuthorizedHandler implements AuthenticationEntryPoint {
     public void commence(HttpServletRequest request, HttpServletResponse response,
                          AuthenticationException authException) throws IOException, ServletException {
         String username = request.getParameter("username");
-        logger.info("unauthorized -> user:{}",username);
+        logger.debug("unauthorized -> user:{}",username);
         ResponseResult<String> res = ResponseResult.build(ResultStatus.UNAUTHORIZED);
         out(response,res);// 回报未登录信息
     }
